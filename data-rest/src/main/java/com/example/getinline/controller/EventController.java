@@ -2,8 +2,6 @@ package com.example.getinline.controller;
 
 import com.example.getinline.constant.EventStatus;
 import com.example.getinline.dto.EventResponse;
-import com.example.getinline.service.EventServiceImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

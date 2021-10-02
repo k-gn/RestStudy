@@ -3,13 +3,17 @@ package com.example.getinline.controller.error;
 import com.example.getinline.constant.ErrorCode;
 import com.example.getinline.dto.APIErrorResponse;
 import com.example.getinline.exception.GeneralException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 import java.util.Map;
 
 // 예외 처리 관심사 분리
@@ -38,7 +42,13 @@ public class BaseExceptionHandler {
 
     // 그 외 예상치 못한 모든 에러를 처리 (INTERNAL_ERROR 로 간주)
     @ExceptionHandler
-    public ModelAndView exception(Exception e) {
+    public Object exception(Exception e) {
+
+        if(e instanceof DataIntegrityViolationException) {
+            ErrorCode errorCode = ErrorCode.VALIDATION_ERROR;
+            return ResponseEntity.badRequest().body(APIErrorResponse.of(false, errorCode.getCode(), errorCode.getMessage(e)));
+        }
+
         ErrorCode errorCode = ErrorCode.INTERNAL_ERROR;
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         return new ModelAndView("error", Map.of(

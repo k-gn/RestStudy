@@ -1,9 +1,7 @@
 package com.example.getinline.integration;
 
 import com.example.getinline.dto.EventDTO;
-import com.example.getinline.repository.EventRepository;
 import com.example.getinline.service.EventServiceImpl;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,8 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
