@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/api")
 public class APIEventController {
 
-    @GetMapping("/get")
+    @GetMapping(path = "/custom")
     @ResponseBody
     public String get() {
         return "custom controller get";
